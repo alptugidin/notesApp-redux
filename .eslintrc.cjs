@@ -25,6 +25,7 @@ module.exports = {
     "import/extensions" : 0,
     "import/no-unresolved": 0,
     "no-console": "off",
-    "no-tabs": "off"
+    "no-tabs": "off",
+    "react/prop-types": "off"
   },
 };

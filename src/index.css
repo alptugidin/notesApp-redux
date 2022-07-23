@@ -6,3 +6,8 @@
 html{
     @apply bg-gray-200
 }
+
+.note:hover > .remove-svg{
+    @apply opacity-100
+}
+
