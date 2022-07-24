@@ -1,5 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import SearchBox from '@/components/SearchBox';
 import TextArea from '@/components/TextArea';
 import NoteList from '@/components/NoteList';
@@ -12,7 +14,9 @@ function NotesApp() {
       <Provider store={store}>
         <TextArea />
         <SearchBox />
-        <NoteList />
+        <DndProvider backend={HTML5Backend}>
+          <NoteList />
+        </DndProvider>
       </Provider>
     </div>
   );

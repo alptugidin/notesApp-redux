@@ -1,21 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useDrag } from 'react-dnd';
 
-function Note({ data }) {
+function Note({ data, dragEvent }) {
   const textColors = useSelector((state) => state.color.textColors);
+  const textColor = textColors.find((item) => item.name === data.color).color;
   const bgColors = useSelector((state) => state.color.bgColors);
   const bgColor = bgColors.find((item) => item.name === data.color).color;
+  const noteRef = createRef();
 
-  const textColor = textColors.find((item) => {
-    if (item.name === data.color) {
-      return item.color;
-    }
-    return 'text-gray-800';
-  });
+  // useEffect(() => {
+  //   const eventArr = ['dragstart', 'dragend', 'drop'];
+  //   const multipleDragEvents = (ref, events, handler) => {
+  //     events.forEach((event) => {
+  //       ref.addEventListener(event, (e) => {
+  //         handler(e.target.dataset.id);
+  //       });
+  //     });
+  //   };
+  //
+  //   multipleDragEvents(noteRef.current, eventArr, dragEvent);
+  // }, []);
 
   return (
     <div
       draggable="true"
+      ref={noteRef}
+      data-id={data.id}
       className={`note w-full relative mx-auto rounded-lg shadow-lg p-1 cursor-move ${bgColor}`}
     >
       <div

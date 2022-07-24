@@ -6,19 +6,19 @@ app.use(express.json());
 
 const notes = [
   {
-    id: toolkit.nanoid(), name: 'Test note', status: 'todo', color: 'green',
+    id: toolkit.nanoid(), name: 'Test note 1', status: 'todo', color: 'green',
   },
 
   {
-    id: toolkit.nanoid(), name: 'Test note', status: 'todo', color: 'blue',
+    id: toolkit.nanoid(), name: 'Test note 2', status: 'todo', color: 'blue',
   },
 
   {
-    id: toolkit.nanoid(), name: 'Test note', status: 'todo', color: 'purple',
+    id: toolkit.nanoid(), name: 'Test note 3', status: 'done', color: 'purple',
   },
 
   {
-    id: toolkit.nanoid(), name: 'Test note', status: 'todo', color: 'red',
+    id: toolkit.nanoid(), name: 'Test note 4', status: 'doing', color: 'red',
   },
 
 ];

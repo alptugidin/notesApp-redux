@@ -23,6 +23,7 @@ export const colorSlice = createSlice({
       { name: 'orange', color: 'text-orange-800' },
       { name: 'purple', color: 'text-purple-800' },
       { name: 'yellow', color: 'text-yellow-800' },
+      { name: 'white', color: 'text-gray-600' },
     ],
     bgColors: [
       { name: 'blue', color: 'bg-blue-200' },

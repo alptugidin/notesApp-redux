@@ -16,11 +16,17 @@ export const noteSlice = createSlice({
   name: 'notes',
   initialState: {
     items: [],
+    isLoading: false,
   },
 
   extraReducers: {
+    [getAsyncNotes.pending]: (state) => {
+      state.isLoading = true;
+    },
+
     [getAsyncNotes.fulfilled]: (state, action) => {
 	  state.items = action.payload;
+      state.isLoading = false;
     },
 
     [addAsyncNotes.fulfilled]: (state, action) => {
