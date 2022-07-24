@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Palette from '@/components/Palette';
 import { addAsyncNotes } from '@/redux/noteSlice';
@@ -6,19 +6,8 @@ import { addAsyncNotes } from '@/redux/noteSlice';
 function TextArea() {
   const [value, setValue] = useState('');
   const activeBgColor = useSelector((state) => state.color.value);
-  const [buttons, setButtons] = useState([]);
   const activeColor = useSelector((state) => state.color.activeColor);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    buttons.forEach((button) => {
-      if (button.dataset.color === activeColor.target.dataset.color) {
-        button.classList.remove('hidden');
-      } else {
-        button.classList.add('hidden');
-      }
-    });
-  }, []);
 
   const add = () => {
     dispatch(addAsyncNotes({ value, activeColor }));

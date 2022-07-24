@@ -12,6 +12,12 @@ export const addAsyncNotes = createAsyncThunk('notes/addAsyncNotes', async ({ va
   return response.data;
 });
 
+export const updateAsyncNotes = createAsyncThunk('notes/updateAsyncNotes', async ({ id, status }) => {
+  const data = { id, status };
+  const response = await axios.put('/api/update', data);
+  return response.data;
+});
+
 export const noteSlice = createSlice({
   name: 'notes',
   initialState: {
@@ -31,6 +37,10 @@ export const noteSlice = createSlice({
 
     [addAsyncNotes.fulfilled]: (state, action) => {
       state.items.push(action.payload);
+    },
+
+    [updateAsyncNotes.fulfilled]: (state, action) => {
+      state.items = action.payload;
     },
   },
 });

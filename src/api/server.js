@@ -21,6 +21,17 @@ const notes = [
     id: toolkit.nanoid(), name: 'Test note 4', status: 'doing', color: 'red',
   },
 
+  {
+    id: toolkit.nanoid(), name: 'Test note 5', status: 'doing', color: 'blue',
+  },
+
+  {
+    id: toolkit.nanoid(), name: 'Test note 6', status: 'doing', color: 'yellow',
+  },
+
+  {
+    id: toolkit.nanoid(), name: 'Test note 66', status: 'doing', color: 'yellow',
+  },
 ];
 
 app.get('/api/notes', (req, res) => {
@@ -36,6 +47,14 @@ app.post('/api/add/', (req, res) => {
   };
   notes.push(note);
   res.send(note);
+});
+
+app.put('/api/update', (req, res) => {
+  const index = notes.findIndex((item) => item.id === req.body.id);
+  notes[index].status = req.body.status;
+  const cutOut = notes.splice(index, 1)[0];
+  notes.splice(notes.length, 0, cutOut);
+  res.send(notes);
 });
 
 app.listen(3001, () => {
