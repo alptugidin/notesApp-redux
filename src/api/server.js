@@ -4,7 +4,7 @@ import toolkit from '@reduxjs/toolkit';
 const app = express();
 app.use(express.json());
 
-const notes = [
+let notes = [
   {
     id: toolkit.nanoid(), name: 'Test note 1', status: 'todo', color: 'green',
   },
@@ -55,6 +55,11 @@ app.put('/api/update', (req, res) => {
   const cutOut = notes.splice(index, 1)[0];
   notes.splice(notes.length, 0, cutOut);
   res.send(notes);
+});
+
+app.delete('/api/delete/:id', (req, res) => {
+  notes = notes.filter((item) => item.id !== req.params.id);
+  res.send(req.params.id);
 });
 
 app.listen(3001, () => {

@@ -1,5 +1,6 @@
 import React, { createRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAsyncNotes } from '@/redux/noteSlice';
 
 function Note({ data, dragEvent, showRemove }) {
   const textColors = useSelector((state) => state.color.textColors);
@@ -7,6 +8,7 @@ function Note({ data, dragEvent, showRemove }) {
   const bgColors = useSelector((state) => state.color.bgColors);
   const bgColor = bgColors.find((item) => item.name === data.color).color;
   const noteRef = createRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const eventArr = ['dragstart', 'dragend'];
@@ -21,6 +23,10 @@ function Note({ data, dragEvent, showRemove }) {
     multipleDragEvents(noteRef.current, eventArr, dragEvent);
   }, []);
 
+  const remove = () => {
+    dispatch(deleteAsyncNotes({ id: data.id }));
+  };
+
   return (
     <div
       ref={noteRef}
@@ -29,7 +35,9 @@ function Note({ data, dragEvent, showRemove }) {
       className={`note w-full relative mx-auto rounded-lg shadow-lg p-1 ${bgColor} hover:cursor-grab transition-all`}
     >
       {showRemove && (
-        <div
+        <button
+          type="button"
+          onClick={remove}
           className="remove-svg absolute right-1 w-[24px] h-[24px] rounded-full border border-1 hover:border-red-400 opacity-0 transition-all"
         >
 
@@ -39,7 +47,7 @@ function Note({ data, dragEvent, showRemove }) {
             className="hover:cursor-pointer"
           />
 
-        </div>
+        </button>
       )}
       <span className={`todo-text text-md ${textColor}`}>{data.name}</span>
 

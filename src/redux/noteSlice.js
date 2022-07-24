@@ -18,6 +18,11 @@ export const updateAsyncNotes = createAsyncThunk('notes/updateAsyncNotes', async
   return response.data;
 });
 
+export const deleteAsyncNotes = createAsyncThunk('notes/deleteAsyncNotes', async ({ id }) => {
+  const response = await axios.delete(`/api/delete/${id}`);
+  return response.data;
+});
+
 export const noteSlice = createSlice({
   name: 'notes',
   initialState: {
@@ -41,6 +46,10 @@ export const noteSlice = createSlice({
 
     [updateAsyncNotes.fulfilled]: (state, action) => {
       state.items = action.payload;
+    },
+
+    [deleteAsyncNotes.fulfilled]: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
     },
   },
 });
