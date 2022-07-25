@@ -30,6 +30,7 @@ function SearchBox() {
     <div>
       <form
         action=""
+        onSubmit={(e) => e.preventDefault()}
         className="w-fit mx-auto mt-10"
       >
         <input
